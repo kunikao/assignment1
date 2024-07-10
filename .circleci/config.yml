@@ -1,35 +1,32 @@
+# This config was automatically generated from your source code
+# Stacks detected: deps:python:.,file:manage.py:.
 version: 2.1
-
-executors:
-  python-executor:
-    docker:
-      - image: circleci/python:3.8
-    working_directory: ~/repo
-
+orbs:
+  python: circleci/python@2
 jobs:
-  test:
-    executor: python-executor
+  test-python:
+    # Install dependencies and run tests
+    docker:
+      - image: cimg/python:3.8-node
     steps:
       - checkout
-      - run:
-          name: Install system dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y python3-dev default-libmysqlclient-dev
-      - run:
-          name: Install Python dependencies
-          command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
+      - python/install-packages
       - run:
           name: Run tests
-          command: |
-            . venv/bin/activate
-            python manage.py test
-
+          command: python manage.py test
+  deploy:
+    # This is an example deploy job, not actually used by the workflow
+    docker:
+      - image: cimg/base:stable
+    steps:
+      # Replace this with steps to deploy to users
+      - run:
+          name: deploy
+          command: '#e.g. ./deploy.sh'
 workflows:
-  version: 2
-  test:
+  build-and-test:
     jobs:
-      - test
+      - test-python
+    # - deploy:
+    #     requires:
+    #       - test-python
