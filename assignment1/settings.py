@@ -28,10 +28,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['https://assignment1-frontend-pi.vercel.app/', 'localhost', '127.0.0.1']
 
+CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 
 CSRF_COOKIE_SECURE = False
 
-CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
