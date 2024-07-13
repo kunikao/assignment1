@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-xe9*ql^yv@z&-c3zdi1fjcdz^pw$lawc)cjnuxx-&81ybxcqiu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://assignment1-frontend-pi.vercel.app/', 'localhost', '127.0.0.1']
+
 
 CSRF_COOKIE_SECURE = False
 
@@ -142,3 +143,9 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "https://assignment1-frontend-pi.vercel.app",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
+]
