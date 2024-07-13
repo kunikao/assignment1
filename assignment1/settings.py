@@ -146,7 +146,16 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # Add this line
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
 }
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 
 CORS_ALLOWED_ORIGINS = [
     "https://assignment1-frontend-pi.vercel.app",
