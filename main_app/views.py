@@ -3,9 +3,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import User, MainForm
+from .models import MainForm
 from .serializers import UserSerializer, MainFormSerializer
-
 
 class RegisterAPIView(APIView):
     def post(self, request):
@@ -15,7 +14,6 @@ class RegisterAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class LoginAPIView(APIView):
     def post(self, request):
         username = request.data.get('username')
@@ -23,15 +21,14 @@ class LoginAPIView(APIView):
 
         user = authenticate(username=username, password=password)
 
-        if user:
+        if user and user.is_active and user.is_superuser:
             refresh = RefreshToken.for_user(user)
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
             }, status=status.HTTP_200_OK)
         else:
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
+            return Response({'error': 'Invalid credentials or not a superuser'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class MainFormAPIView(APIView):
     def get(self, request):
