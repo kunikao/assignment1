@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-xe9*ql^yv@z&-c3zdi1fjcdz^pw$lawc)cjnuxx-&81ybxcqiu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://assignment1-frontend-pi.vercel.app/', '127.0.0.1', 'http://localhost:3000']
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', 'localhost']
 
 CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
 
@@ -55,9 +55,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
