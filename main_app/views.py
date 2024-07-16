@@ -21,7 +21,7 @@ class LoginAPIView(APIView):
 
         user = authenticate(username=username, password=password)
 
-        if user and user.is_active and user.is_superuser:
+        if user and user.is_active:
             refresh = RefreshToken.for_user(user)
             return Response({
                 'refresh': str(refresh),
